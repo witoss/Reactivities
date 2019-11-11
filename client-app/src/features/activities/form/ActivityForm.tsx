@@ -5,6 +5,7 @@ import { v4 as uuid } from "uuid";
 import ActivityStore from "../../../app/stores/activityStore";
 import { observer } from "mobx-react-lite";
 import { RouteComponentProps } from "react-router";
+import Calendar from 'react-calendar'
 
 interface DetailParams {
   id: string;
@@ -65,6 +66,12 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
         history.push(`/activities/${activity.id}`)
       );
     }
+  };
+
+  const dateChanged = (date: any) => {
+    console.log(date);
+    setActivity({ ...activity, title: date.getDay() });
+
   };
 
   const handleInputChange = (
@@ -131,6 +138,8 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
           content="Cancel"
         />
       </Form>
+
+      <Calendar onChange={dateChanged}/>>
     </Segment>
   );
 };
